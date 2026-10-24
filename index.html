@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Projeto No-Code | Hub de Alunos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#7c3aed', secondary: '#0ea5e9', dark: '#0f172a' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background: #0f172a; color: white; }
+        .step { display: none; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .step.active { display: block; opacity: 1; }
+        .input-field { width: 100%; padding: 0.75rem; border-radius: 0.5rem; background: #1e293b; border: 1px solid #334155; color: white; outline: none; transition: border-color 0.2s; }
+        .input-field:focus { border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: bold; cursor: pointer; transition: transform 0.1s, opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: linear-gradient(to right, #7c3aed, #0ea5e9); color: white; }
+        .btn-secondary { background: #334155; color: white; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-2xl bg-gray-800 rounded-2xl shadow-2xl p-8 relative overflow-hidden border border-gray-700">
+        
+        <!-- Barra de Progresso -->
+        <div class="w-full bg-gray-700 h-2 rounded-full mb-8">
+            <div id="progress-bar" class="h-2 rounded-full bg-gradient-to-r from-primary to-secondary transition-all duration-300 w-1/4"></div>
+        </div>
+
+        <form id="wizard-form" class="relative">
+            <!-- Etapa 1 -->
+            <div class="step active" id="step-1">
+                <h2 class="text-2xl font-bold mb-4 text-primary">Etapa 1: Quem é você?</h2>
+                <div class="space-y-4">
+                    <div><label class="block text-sm mb-1 text-gray-300">Nome Completo</label>
+                    <input type="text" name="aluno_nome" required class="input-field"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">E-mail</label>
+                    <input type="email" name="aluno_email" required class="input-field"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Seu nível em No-Code</label>
+                    <select name="aluno_nivel" required class="input-field">
+                        <option value="">Selecione...</option>
+                        <option value="Iniciante">Iniciante</option>
+                        <option value="Intermediário">Intermediário</option>
+                        <option value="Avançado">Avançado</option>
+                    </select></div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="btn btn-primary next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 2 -->
+            <div class="step" id="step-2">
+                <h2 class="text-2xl font-bold mb-4 text-primary">Etapa 2: Sobre o Projeto</h2>
+                <div class="space-y-4">
+                    <div><label class="block text-sm mb-1 text-gray-300">Nome do Projeto</label>
+                    <input type="text" name="projeto_nome" required class="input-field"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Descrição do Projeto</label>
+                    <textarea name="projeto_descricao" rows="3" required class="input-field"></textarea></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Objetivo Principal</label>
+                    <input type="text" name="projeto_objetivo" placeholder="Ex: Captar leads..." required class="input-field"></div>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" class="btn btn-secondary prev-btn">Voltar</button>
+                    <button type="button" class="btn btn-primary next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 3 -->
+            <div class="step" id="step-3">
+                <h2 class="text-2xl font-bold mb-4 text-primary">Etapa 3: Ferramentas</h2>
+                <div class="space-y-4">
+                    <div><label class="block text-sm mb-1 text-gray-300">Ferramentas Usadas</label>
+                    <input type="text" name="ferramentas_usadas" placeholder="Ex: Make, Zapier..." required class="input-field"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Integrações (Onde conecta?)</label>
+                    <input type="text" name="integracoes" placeholder="Ex: Telegram, Sheets..." required class="input-field"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Já está em produção?</label>
+                    <select name="em_producao" required class="input-field">
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </select></div>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" class="btn btn-secondary prev-btn">Voltar</button>
+                    <button type="button" class="btn btn-primary next-btn">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 4 -->
+            <div class="step" id="step-4">
+                <h2 class="text-2xl font-bold mb-4 text-primary">Etapa 4: Impacto</h2>
+                <div class="space-y-4">
+                    <div><label class="block text-sm mb-1 text-gray-300">Horas economizadas por semana</label>
+                    <input type="number" name="horas_economizadas_semana" required class="input-field" min="0"></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Área que mais ajuda</label>
+                    <select name="area_ajuda" required class="input-field">
+                        <option value="Marketing">Marketing</option>
+                        <option value="Vendas">Vendas</option>
+                        <option value="Operacional">Operacional</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Suporte">Suporte</option>
+                    </select></div>
+                    <div><label class="block text-sm mb-1 text-gray-300">Link de Referência (Opcional)</label>
+                    <input type="url" name="link_referencia" class="input-field"></div>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" class="btn btn-secondary prev-btn">Voltar</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Enviar e Analisar com IA 🚀</button>
+                </div>
+            </div>
+            
+            <!-- Loader -->
+            <div id="loader" class="hidden text-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
+                <p class="text-gray-300">Enviando projeto e analisando com IA... aguarde.</p>
+            </div>
+
+            <!-- Sucesso -->
+            <div id="success-msg" class="hidden text-center py-8">
+                <div class="text-5xl mb-4">🎉</div>
+                <h2 class="text-2xl font-bold text-green-400 mb-2">Projeto Enviado!</h2>
+                <p class="text-gray-300 mb-4">Seu projeto foi recebido e analisado pela nossa IA.</p>
+                <div id="ai-summary" class="bg-gray-700 p-4 rounded-lg text-left text-sm text-gray-200 italic mb-6"></div>
+                <button type="button" onclick="location.reload()" class="btn btn-secondary">Enviar outro projeto</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="js/wizard.js"></script>
+</body>
+</html>
